@@ -109,30 +109,10 @@ export default {
         this.$router.replace({ name: "home" });
         }
       });
-
-      // .then(function(response){
-      //   console.log('response',response)
-      // if (response.status == '201') {
-      //     self.$router.push({ name: "home"});
-      //   }
-      // })
     }
   }
 };
 
-
-
-//   submitEntry: function() {
-//         this.ajaxRequest = true;
-//         this.$http.post('http://localhost:3000/entry', {
-//               fname: this.fname,
-//               lname: this.lname,
-//               age: this.age
-//             }, function (data, status, request) {
-//                 this.postResults = data;
-
-//                 this.ajaxRequest = false;
-//             });
 
 </script>
 
