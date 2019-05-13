@@ -29,8 +29,9 @@
               <el-checkbox label="Book"></el-checkbox>
             </el-checkbox-group>
          </div>
-
-       <ImageUpload></ImageUpload>
+         
+         <input type="file" multiple :name="uploadFieldName" accept="image/*" class="input-file">
+       
 
 
         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Add</button>
@@ -47,14 +48,13 @@
 
 <script>
 import axios from "axios";
-import ImageUpload from "@/components/ImageUpload"
 import Navbar from "@/components/Navbar"
 
 export default {
     name: "add",
       components: {
-      Navbar,
-      ImageUpload
+      Navbar
+      
   },
 
 
