@@ -1,34 +1,25 @@
 <template>
   <div class="home">
-  <div>{{user}}</div>
     <Navbar></Navbar>
-
-    <div class='category'>
-      <a href="#">Art</a>
-      <a href="#">Comics</a>
-      <a href="#">Design & Technology</a>
-      <a href="#">Cinema</a>
-      <a href="#">Food & Creation</a>
-      <a href="#">Game</a>
-      <a href="#">Music</a>
-      <a href="#">Book</a>
-    </div> 
-
-
-<div v-for="project in projects"  :key="project.id">
-  <el-row id='cardtest' >
-    <el-card class='card' :body-style="{ padding: '0px' }">
-      <img :src=" project.image " class="image">
-      <div style="padding: 14px;">
-        <h3 @click="goTodetail(project.id)" >{{project.name}}</h3>
-        <div class="bottom clearfix">
-          <div class="description">{{ project.description }}</div>
-          <a href="#" class="owner">By To define</a>
+    <CategoryHeader></CategoryHeader>
+    
+ 
+  <div v-for="project in projects"  :key="project._id">
+    <el-row id='cardtest' >
+      <el-card class='card' :body-style="{ padding: '0px' }">
+        <img :src=" project.image " class="image">
+        <div style="padding: 14px;">
+          <h3 @click="goTodetail(project._id)" >{{project.name}}</h3>
+          <div class="bottom clearfix">
+            <div class="description">{{ project.description }}</div>
+            <div class='createdAt'> created at {{ project.created }}</div>
+            <a href="#" class="owner">By To define</a>
+          </div>
         </div>
-      </div>
-    </el-card>
-  </el-row>
-</div>
+      </el-card>
+    </el-row>
+  </div>
+
 
 
 
@@ -38,7 +29,8 @@
 <script>
 import Navbar from "@/components/Navbar";
 import axios from "axios";
-import CardMedium from "@/components/CardMedium"
+import CategoryHeader from "@/components/CategoryHeader"
+
 
 
 
@@ -46,7 +38,8 @@ import CardMedium from "@/components/CardMedium"
 export default {
   name: "home",
   components: {
-    Navbar
+    Navbar,
+    CategoryHeader
   },
 
   data() {
@@ -54,6 +47,7 @@ export default {
     projects: [],
     title:"show", 
     user: localStorage.getItem('token'),
+
 
     };
   },
@@ -70,41 +64,22 @@ export default {
 
     loadData() {
     axios
-      .get("http://localhost:3000/api/v1/projects")
+      .get("http://localhost:7777/projects")
       .then(response => {
-        let data = response.data.projects;
-        console.log('yoloooooooooo',data)
-        this.projects = data 
-        console.log('nihao',this.projects)
-      });
+        console.log(response)
+        this.projects = response.data.projects 
+        console.log('nihao', this.projects)
+       });
     },
   }
 };
 </script>
 
 
+
+
+
 <style>
-.category {
-  display: flex;
-  justify-content: space-between;
-  padding: 1.5% 9%;
-
-  border: 1px solid #e8e8e8;
-}
-
-.category a {
-    text-decoration: none;
- color:#656969;
-}
-.category a:hover {
-    text-decoration: none;
-    color: black;
-    font-weight: bold;
-    transition: 0.5s;
-}
-
-/* ========================================================= */
-
 .card {
     width: 331px;
 }
@@ -163,4 +138,8 @@ export default {
   .clearfix:after {
       clear: both
   }
+
+/* ========================================================= */
+
+
 </style>

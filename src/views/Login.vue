@@ -15,7 +15,7 @@
               </div>
 
               <div class="form-label-group">
-                  
+
                 <input v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                 <label for="inputPassword">Password</label>
               </div>
@@ -54,28 +54,28 @@ export default {
  data() {
     return {
     email: '',
-    password:'', 
+    password:'',
     };
   },
 
   mounted () {
-  
+
   },
 
   methods: {
     processForm: function() {
 
-      let user = { 
-            encrypted_password: this.password, 
-            email: this.email , 
+      let user = {
+            encrypted_password: this.password,
+            email: this.email ,
         }
       console.log('super', user)
       alert('Processing!');
 
       axios({
-            method: 'POST', 
+            method: 'POST',
             url: 'api/v1/sessions',
-            data: {user: user} 
+            data: {user: user}
             })
       .then(response => {
           console.log('auth', response)
@@ -87,36 +87,29 @@ export default {
         }
 
         resolve(response)
-        
+
       })
     //   .catch(err => {
-        
+
     //     localStorage.removeItem('token')
-        
+
     //   })
 
-    //    .then(data => {  
+    //    .then(data => {
     //     console.log('data',data)
     //     if (data.status == '201') {
     //     this.$router.replace({ name: "home" });
     //     }
     //   });
-    //   .then(data => {  
+    //   .then(data => {
     //     console.log('data',data)
     //     if (data.status == '201') {
     //     this.$router.replace({ name: "home" });
     //     }
     //   });
     // }
+    }
   }
-  }
-
-
-
-
-
-
-
 };
 </script>
 
@@ -126,10 +119,7 @@ export default {
   --input-padding-y: .75rem;
 }
 
-body {
-  background: #007bff;
-  background: linear-gradient(to right, #0062E6, #33AEFF);
-}
+
 
 .card-signin {
   border: 0;
