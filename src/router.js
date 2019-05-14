@@ -5,6 +5,7 @@ import Home from './views/Home.vue'
 import Signup from './views/Signup.vue'
 import Login from './views/Login.vue'
 import addProject from './views/addProject.vue'
+import updateProject from './views/updateProject.vue'
 
 
 Vue.use(Router)
@@ -24,6 +25,16 @@ export default new Router({
       component: Show
     },
     {
+      path: '/add',
+      name: 'addProject',
+      component: addProject
+    },
+    {
+       path: '/update/:Pid',
+       name: 'updateProject',
+       component: updateProject
+     },
+    {
       path: '/signup',
       name: 'signup',
       component: Signup
@@ -33,11 +44,7 @@ export default new Router({
       name: 'login',
       component: Login
     },
-    {
-      path: '/add',
-      name: 'addProject',
-      component: addProject
-    },
+    
     {
       path: '/about',
       name: 'about',

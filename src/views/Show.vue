@@ -17,6 +17,8 @@
                     <div class='project-tags'>TAGS :{{project.tags}}</div>
                     <div class='project-date'>DATE :{{project.created}}</div>
 
+                    <button @click='update(proId)' class='update btn'>update</button> 
+
                 </div>
             </div>
 
@@ -97,6 +99,10 @@
                 this.project = data 
                 console.log('nihao',this.project)
             });
+        },
+
+        update(proId) {
+             this.$router.push({name:'updateProject',params:{_id:proId}})
         },
     },
 }
