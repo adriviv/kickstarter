@@ -90,14 +90,13 @@
 
     methods: {
         showApi() {
-            let id = this.$route.params.Pid
+            let slug = this.$route.params.Pid
             axios 
-            .get(`/show/${id}`)
+            .get(`/show/${slug}`)
             .then(response => {
                 let data = response.data;
-                console.log('yoloooooooooo',data)
+                console.log('show-data-fetche',data)
                 this.project = data 
-                console.log('nihao',this.project)
             });
         },
 
