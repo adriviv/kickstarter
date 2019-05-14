@@ -8,7 +8,7 @@
     <el-row id='cardtest' >
       <el-card class='card' :body-style="{ padding: '0px' }">
         <img :src=" project.image " class="image">
-        <div style="padding: 14px;">
+        <div style="padding: 14px;">          
           <h3 @click="goTodetail(project._id)" >{{project.name}}</h3>
           <div class="bottom clearfix">
             <div class="description">{{ project.description }}</div>
@@ -45,7 +45,7 @@ export default {
   data() {
     return {
     projects: [],
-    title:"show", 
+    title:"home", 
     user: localStorage.getItem('token'),
 
 
@@ -64,11 +64,10 @@ export default {
 
     loadData() {
     axios
-      .get("http://localhost:7777/projects")
+      .get("projects")
       .then(response => {
-        console.log(response)
         this.projects = response.data.projects 
-        console.log('nihao', this.projects)
+        console.log('index-list', this.projects)
        });
     },
   }

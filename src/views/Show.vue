@@ -12,8 +12,13 @@
                     <el-button class='follow-btn' type="info" plain>Follow this Creator</el-button>
                 </div>
                 <div class='header-right'>
-                    <div class='project-name'>{{project.name}}</div>
-                    <div class='project-description'>{{project.description}}</div>
+                    <div class='project-name'> PORJECT NAME: {{project.name}}</div>
+                    <div class='project-description'>DESCRIPTION :{{project.description}}</div>
+                    <div class='project-tags'>TAGS :{{project.tags}}</div>
+                    <div class='project-date'>DATE :{{project.created}}</div>
+
+                    <button @click='update(proId)' class='update btn'>update</button> 
+
                 </div>
             </div>
 
@@ -85,15 +90,18 @@
 
     methods: {
         showApi() {
-            let id = this.$route.params.Pid
+            let slug = this.$route.params.Pid
             axios 
-            .get(`http://localhost:3000/api/v1/projects/${id}`)
+            .get(`/show/${slug}`)
             .then(response => {
                 let data = response.data;
-                console.log('yoloooooooooo',data)
+                console.log('show-data-fetche',data)
                 this.project = data 
-                console.log('nihao',this.project)
             });
+        },
+
+        update(proId) {
+             this.$router.push({name:'updateProject',params:{_id:proId}})
         },
     },
 }

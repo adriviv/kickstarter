@@ -1,9 +1,7 @@
 <template>
-   <div class="addProject">
+   <div class="updateProject">
 
     <Navbar></Navbar>
-
-
  
       <body>
         <h5 class="card-title text-center">Add Project</h5>
@@ -14,7 +12,7 @@
           </div>
            <div class="form-label-group">
             <input v-model="projectDescription" type="text" id="inputDescription" class="form-control" placeholder="Project Description" required autofocus>
-            <label for="inputDescription">Description of the project</label>
+            <label for="inputDescription">Description</label>
           </div>
 
           <div class="form-label-group">
@@ -29,7 +27,8 @@
               <el-checkbox label="Book"></el-checkbox>
             </el-checkbox-group>
          </div>
-         
+
+
          <input type="file" multiple :name="uploadFieldName" accept="image/*" class="input-file">
        
 
@@ -51,7 +50,7 @@ import axios from "axios";
 import Navbar from "@/components/Navbar"
 
 export default {
-    name: "add",
+    name: "updateProject",
       components: {
       Navbar
       
@@ -61,32 +60,53 @@ export default {
 
  data() {
     return {
+    project: [],
     projectName: '',
     projectDescription:'',
     checkList: [],
-    photo: ''
+    photo: '',
+    id:''
+    
     };
   },
 
   mounted () {
-
+      this.loadData();
   },
 
   methods: {
+        loadData() {
+            let slug = this.$route.params.Pid
+            axios
+            .get(`/show/${slug}`)
+            .then(response => {
+                console.log('LA REPONSE', response)
+                this.project = response.data 
+                this.checkList = response.data.tags
+                this.projectName = response.data.name
+                this.projectDescription = response.data.description
+                this.id = response.data._id
+               //  console.log('LE PROJET', this.project)
+            });
+        },
+      
+
     processForm: function() {
       alert('Processing!');
+            let slug = this.$route.params.Pid
 
       axios({
             method: 'POST',
-            url: '/add',
+            url: '/add/:slug',
             data: { name: this.projectName,
             description: this.projectDescription,
             tags: this.checkList,
-            photo: this.uploadFieldName}
+            photo: this.uploadFieldName,
+            id: this.id}
             })
       .then(response => {
-          console.log('addproject', response),
-          window.location.href = './'      
+          console.log('addproject', response)
+          window.location.href = 'http://localhost:8080/'      
           });
     },
   },

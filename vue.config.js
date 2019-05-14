@@ -1,7 +1,7 @@
 // vue.config.js
 module.exports = {
   devServer: {
-    proxy: 'http://localhost:7777',
+    proxy: 'http://localhost:7777/',
 }
     // options ...
   }
