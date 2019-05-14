@@ -12,8 +12,11 @@
                     <el-button class='follow-btn' type="info" plain>Follow this Creator</el-button>
                 </div>
                 <div class='header-right'>
-                    <div class='project-name'>{{project.name}}</div>
-                    <div class='project-description'>{{project.description}}</div>
+                    <div class='project-name'> PORJECT NAME: {{project.name}}</div>
+                    <div class='project-description'>DESCRIPTION :{{project.description}}</div>
+                    <div class='project-tags'>TAGS :{{project.tags}}</div>
+                    <div class='project-date'>DATE :{{project.created}}</div>
+
                 </div>
             </div>
 
@@ -87,7 +90,7 @@
         showApi() {
             let id = this.$route.params.Pid
             axios 
-            .get(`http://localhost:3000/api/v1/projects/${id}`)
+            .get(`/show/${id}`)
             .then(response => {
                 let data = response.data;
                 console.log('yoloooooooooo',data)

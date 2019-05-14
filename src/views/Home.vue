@@ -64,7 +64,7 @@ export default {
 
     loadData() {
     axios
-      .get("http://localhost:7777/projects")
+      .get("projects")
       .then(response => {
         console.log(response)
         this.projects = response.data.projects 
