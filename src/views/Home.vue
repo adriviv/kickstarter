@@ -45,7 +45,7 @@ export default {
   data() {
     return {
     projects: [],
-    title:"show", 
+    title:"home", 
     user: localStorage.getItem('token'),
 
 

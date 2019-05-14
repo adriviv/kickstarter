@@ -85,9 +85,9 @@ export default {
             photo: this.uploadFieldName}
             })
       .then(response => {
-          console.log('addproject', response)
-        
-      });
+          console.log('addproject', response),
+          window.location.href = './'      
+          });
     },
   },
 };

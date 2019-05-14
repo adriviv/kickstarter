@@ -6,11 +6,11 @@
 
       <b-navbar-nav>
         <b-nav-item class='navbar-text' href="#">Explore</b-nav-item>
-        <b-nav-item class='navbar-text' href="#">Start A Project</b-nav-item>
+        <b-nav-item class='navbar-text' href="http://localhost:8080/add">Start A Project</b-nav-item>
       </b-navbar-nav>
    
 
-<img id="logo" src="../assets/kickstarter-logo-color.png" href='http://localhost:8080/home'alt="" style="
+<img @click="gohome()" id="logo" src="../assets/kickstarter-logo-color.png"  alt="" style="
     width: 16%;
 ">
 
@@ -46,9 +46,15 @@
 </template>
 
 <script>
-    export default {
-        name: 'Navbar',
-    }
+  export default {
+    name: 'Navbar',
+    
+    methods: {
+      gohome: function() {
+        window.location.href = 'http://localhost:8080/' 
+      },
+    },
+  };
 </script>
 
 <style>
