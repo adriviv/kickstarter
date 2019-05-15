@@ -6,6 +6,9 @@ import Signup from './views/Signup.vue'
 import Login from './views/Login.vue'
 import addProject from './views/addProject.vue'
 import updateProject from './views/updateProject.vue'
+import tags from './views/Tags.vue'
+import tag from './views/Tag.vue'
+
 
 
 Vue.use(Router)
@@ -34,6 +37,16 @@ export default new Router({
        name: 'updateProject',
        component: updateProject
      },
+     {
+      path: '/tags',
+      name: 'tags',
+      component: tags
+    },
+    {
+      path: '/tags/:tag',
+      name: 'tag',
+      component: tag
+    },
     {
       path: '/signup',
       name: 'signup',

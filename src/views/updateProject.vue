@@ -28,11 +28,8 @@
             </el-checkbox-group>
          </div>
 
-
          <input type="file" multiple :name="uploadFieldName" accept="image/*" class="input-file">
        
-
-
         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Add</button>
        
         </form>
