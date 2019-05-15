@@ -23,11 +23,6 @@
                     </div>
 
                     <div class="form-label-group">
-                    <input v-model="address" name="address" type="text" id="inputAddress" class="form-control" placeholder="Address" required autofocus>
-                    <label for="inputAddress">Address</label>
-                    </div>
-
-                    <div class="form-label-group">
                     <input v-model="email" name="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                     <label for="inputEmail">Email address</label>
                     </div>
@@ -35,6 +30,11 @@
                     <div class="form-label-group">
                     <input v-model="password" name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required  >
                     <label for="inputPassword">Password</label>
+                    </div>
+
+                    <div class="form-label-group">
+                    <input v-model="password_confirm" name="password_confirm" type="password" id="inputPasswordConfirm" class="form-control" placeholder="Confirm Password" required  >
+                    <label for="inputPasswordConfirm">Confirm Password</label>
                     </div>
 
                     <div class="custom-control custom-checkbox mb-3">
@@ -72,9 +72,10 @@ export default {
    
     email: '',
     password:'',
+    password_confirm: '', 
     first_name:'',
-    last_name:'',
-    address:'' 
+    last_name:''
+
   
     };
   },
@@ -87,27 +88,25 @@ export default {
 
     processForm: function() {
 
-      let user = { 
-            encrypted_password: this.password, 
-            email: this.email , 
-            first_name: this.first_name, 
-            last_name: this.last_name, 
-            address: this.address, 
-            credit_card_number: 2627
-        }
-      console.log('super', user)
+      // console.log('super', user)
       alert('Processing!');
 
       axios({
             method: 'POST', 
-            url: 'api/v1/users',
-            data: {user: user} 
+            url: '/register',
+            data: {
+            password: this.password, 
+            password_confirm: this.password_confirm,
+            email: this.email , 
+            first_name: this.first_name, 
+            last_name: this.last_name
+              } 
             })
       .then(data => {  
-        console.log('data',data)
-        if (data.status == '201') {
+        console.log('user reponse',data)
+        if (data.status == '200') {
         this.$router.replace({ name: "home" });
-        }
+         }
       });
     }
   }
