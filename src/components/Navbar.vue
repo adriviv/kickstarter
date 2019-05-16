@@ -21,9 +21,9 @@
           <b-form-input size="sm" class="mr-sm-2" id='btn-search' placeholder="Search"></b-form-input>
         </b-nav-form>
 
-    
 
-        <b-nav-item-dropdown right>
+
+        <b-nav-item-dropdown v-if="loggedIn" right>
           <template slot="button-content">
             <img class="avatar" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
           </template>
@@ -35,8 +35,12 @@
           <b-dropdown-item href="#">Parameters</b-dropdown-item>
           <b-dropdown-item href="#">Messages</b-dropdown-item>
           <b-dropdown-item href="#">Activity</b-dropdown-item>
-          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+          <b-dropdown-item><router-link :to="{ name: 'logout' }">Logout</router-link></b-dropdown-item>
         </b-nav-item-dropdown>
+
+        <li v-if="!loggedIn"><router-link :to="{ name: 'login' }">Login</router-link></li>
+        <li v-if="!loggedIn"><router-link :to="{ name: 'signup' }">Register</router-link></li>
+
 
       </b-navbar-nav>
        </b-collapse>
@@ -46,9 +50,17 @@
 </template>
 
 <script>
+import { Store } from 'vuex'
+
   export default {
     name: 'Navbar',
-    
+
+    computed: {
+      loggedIn () {
+        return this.$store.getters.loggedIn
+      }
+    },
+
     methods: {
       gohome: function() {
         window.location.href = 'http://localhost:8080/' 
