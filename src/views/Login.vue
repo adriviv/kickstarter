@@ -54,7 +54,7 @@ export default {
  data() {
     return {
     email: '',
-    password:'',
+    password:''
     };
   },
 
@@ -64,30 +64,29 @@ export default {
 
   methods: {
     processForm: function() {
-
-      let user = {
-            encrypted_password: this.password,
-            email: this.email ,
-        }
-      console.log('super', user)
       alert('Processing!');
-
-      axios({
-            method: 'POST',
-            url: 'api/v1/sessions',
-            data: {user: user}
-            })
-      .then(response => {
-          console.log('auth', response)
-        const token = response.data.auth_token
-        localStorage.setItem('token', token)
-        axios.defaults.headers.common['Authorization'] = token
-        if (response.status == '200') {
+      return new Promise((resolve, reject) => {
+        axios({
+              method: 'POST',
+              url: '/login',
+              data: {
+              password: this.password,
+              email: this.email
+              }
+              })
+        .then(response => {
+            console.log('auth', response)
+            const token = response.data.hash
+            const supere = localStorage.setItem('token', token)
+            localStorage.getItem('token', token)
+            resolve(response)
             this.$router.replace({ name: "home" });
-        }
-
-        resolve(response)
-
+            
+        })
+        .catch(error => {
+          console.log(error)
+          reject(error)
+        })
       })
     //   .catch(err => {
 

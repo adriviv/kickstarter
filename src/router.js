@@ -8,6 +8,8 @@ import addProject from './views/addProject.vue'
 import updateProject from './views/updateProject.vue'
 import tags from './views/Tags.vue'
 import tag from './views/Tag.vue'
+import Logout from './views/Logout.vue'
+
 
 
 
@@ -56,6 +58,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      component: Logout
     },
     
     {
