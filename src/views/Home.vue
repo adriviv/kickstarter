@@ -29,7 +29,7 @@
 <script>
 import Navbar from "@/components/Navbar";
 import axios from "axios";
-import CategoryHeader from "@/components/CategoryHeader"
+import CategoryHeader from "@/components/CategoryHeader";
 
 
 
@@ -81,7 +81,9 @@ export default {
 <style>
 .card {
     width: 331px;
+  
 }
+
 
 .title {
     display: flex;
@@ -124,8 +126,8 @@ export default {
 
   .image {
     width: 331px;
-    height: 212px;
-    display: block;
+    height: 60px;
+
   }
 
 .clearfix:before,
