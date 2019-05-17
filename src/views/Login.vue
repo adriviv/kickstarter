@@ -80,7 +80,8 @@ export default {
             const supere = localStorage.setItem('token', token)
             localStorage.getItem('token', token)
             resolve(response)
-            this.$router.replace({ name: "home" });
+            this.$router.push({ name: "home" });
+           
             
         })
         .catch(error => {
