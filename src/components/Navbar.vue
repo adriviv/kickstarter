@@ -5,7 +5,7 @@
     <b-collapse id="nav-collapse" is-nav>
 
       <b-navbar-nav>
-        <b-nav-item class='navbar-text' href="#">Explore</b-nav-item>
+        <b-nav-item class='navbar-text' href="/tags">Explore</b-nav-item>
         <b-nav-item class='navbar-text' href="http://localhost:8080/add">Start A Project</b-nav-item>
       </b-navbar-nav>
    

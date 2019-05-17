@@ -1,13 +1,13 @@
 <template> 
    <div class='category'>
-      <a href="#">Art</a>
-      <a href="#">Comics</a>
-      <a href="#">Design & Technology</a>
-      <a href="#">Cinema</a>
-      <a href="#">Food & Creation</a>
-      <a href="#">Game</a>
-      <a href="#">Music</a>
-      <a href="#">Book</a>
+      <a href="/tags/Art">Art</a>
+      <a href="/tags/Comics">Comics</a>
+      <a href="/tags/De">Design & Technology</a>
+      <a href="/tags/Cinema">Cinema</a>
+      <a href="/tags/Art">Food & Creation</a>
+      <a href="/tags/Game">Game</a>
+      <a href="/tags/Music">Music</a>
+      <a href="/tags/Book">Book</a>
     </div> 
 </template> 
 
