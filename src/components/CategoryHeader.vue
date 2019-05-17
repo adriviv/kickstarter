@@ -2,9 +2,9 @@
    <div class='category'>
       <a href="/tags/Art">Art</a>
       <a href="/tags/Comics">Comics</a>
-      <a href="/tags/De">Design & Technology</a>
+      <a href="/tags/Design%20and%20Technology">Design & Technology</a>
       <a href="/tags/Cinema">Cinema</a>
-      <a href="/tags/Art">Food & Creation</a>
+      <a href="/tags/Food">Food & Creation</a>
       <a href="/tags/Game">Game</a>
       <a href="/tags/Music">Music</a>
       <a href="/tags/Book">Book</a>

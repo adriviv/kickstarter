@@ -46,15 +46,13 @@ export default {
         review() {
             let slug = this.$route.params.Pid
             console.log('toujour', slug)
-            axios.post(`/show/${slug}/review`, {
+            axios.post(`/show/${slug}/addreview`, {
                 text: this.text,
                 rating: this.rating
             })
             .then(response => {
                 console.log('review answer', response)
-                const r = response.data.access_token
-                // localStorage.setItem('token', token)
-                // context.commit('retrieveToken', token)
+                this.$router.push({ name: 'home' })
             })
             .catch(error => {
                 console.log(error)

@@ -38,6 +38,14 @@
                            <span>Paris - france</span> 
                         </a>
                     </div>
+                     <div class='footer-image'>
+                         <a :href="`/show/${proId}/addreview`">
+                           <span>Add a Review</span> 
+                        </a>
+                        <a :href="`/show/${proId}/GetReviews`">
+                           <span>See Reviews</span> 
+                        </a>
+                    </div>
                 </div>
                 <div class='project-details-right'>
                     <div class="pledge-sub-box">
