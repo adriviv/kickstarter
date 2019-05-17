@@ -59,7 +59,9 @@
                         <div>29</div>
                         <div>Days before the end</div>
                     </div>
-                    <el-button type="success">I support this project</el-button>
+                         <a :href="`/show/${proId}/Pledge`">
+                           <span>I support this project</span> 
+                        </a>
                     <div class="pledge-sub-box2">
                         <el-button>Remind</el-button>
                         <div class='icons-share'>

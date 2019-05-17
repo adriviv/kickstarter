@@ -11,6 +11,7 @@ import tag from './views/Tag.vue'
 import Logout from './views/Logout.vue'
 import AddReview from './views/AddReview.vue'
 import GetReviews from './views/GetReviews.vue'
+import Pledge from './views/Pledge.vue'
 
 
 // TO project tHe routes (auth/not auth) => 
@@ -95,6 +96,14 @@ export default new Router({
       path: '/show/:Pid/GetReviews',
       name: 'GetReviews',
       component: GetReviews,
+    },
+    {
+      path: '/show/:Pid/Pledge',
+      name: 'Pledge',
+      component: Pledge,
+      meta: {
+        requiresAuth: true,
+      }
     },
     
     {
