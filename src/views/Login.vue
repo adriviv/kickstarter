@@ -1,6 +1,8 @@
 <template>
     <div class="login">
 
+    <Navbar></Navbar>
+
 <body>
   <div class="container">
     <div class="row">
@@ -8,7 +10,7 @@
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Sign In</h5>
-            <form  class="form-signin" id='signup-form' @submit.prevent="processForm">
+            <form  class="form-signin" id='signup-form' @submit.prevent="login">
               <div class="form-label-group">
                 <input v-model="email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
                 <label for="inputEmail">Email address</label>
@@ -46,70 +48,31 @@
 
 
 <script>
-import axios from "axios";
+import Navbar from "@/components/Navbar";
+
 export default {
-    name: "login",
-
-
- data() {
+  name: 'login',
+   components: {
+    Navbar,
+  },
+  data() {
     return {
-    email: '',
-    password:''
-    };
+      email: '',
+      password: '',
+    }
   },
-
-  mounted () {
-
-  },
-
   methods: {
-    processForm: function() {
-      alert('Processing!');
-      return new Promise((resolve, reject) => {
-        axios({
-              method: 'POST',
-              url: '/login',
-              data: {
-              password: this.password,
-              email: this.email
-              }
-              })
-        .then(response => {
-            console.log('auth', response)
-            const token = response.data.hash
-            const supere = localStorage.setItem('token', token)
-            localStorage.getItem('token', token)
-            resolve(response)
-            this.$router.replace({ name: "home" });
-            
-        })
-        .catch(error => {
-          console.log(error)
-          reject(error)
-        })
+    login() {
+      this.$store.dispatch('retrieveToken', {
+        email: this.email,
+        password: this.password,
       })
-    //   .catch(err => {
-
-    //     localStorage.removeItem('token')
-
-    //   })
-
-    //    .then(data => {
-    //     console.log('data',data)
-    //     if (data.status == '201') {
-    //     this.$router.replace({ name: "home" });
-    //     }
-    //   });
-    //   .then(data => {
-    //     console.log('data',data)
-    //     if (data.status == '201') {
-    //     this.$router.replace({ name: "home" });
-    //     }
-    //   });
-    // }
+        .then(response => {
+          this.$router.push({ name: 'home' })
+        })
     }
   }
-};
+}
 </script>
 
 <style>
