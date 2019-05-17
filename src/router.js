@@ -9,9 +9,13 @@ import updateProject from './views/updateProject.vue'
 import tags from './views/Tags.vue'
 import tag from './views/Tag.vue'
 import Logout from './views/Logout.vue'
+import AddReview from './views/AddReview.vue'
+import GetReviews from './views/GetReviews.vue'
 
 
-
+// TO project tHe routes (auth/not auth) => 
+// 1 - Add meta requireAuth ou requireVisitor
+// 2 -  at Main.js : make the functions 
 
 Vue.use(Router)
 
@@ -32,12 +36,18 @@ export default new Router({
     {
       path: '/add',
       name: 'addProject',
-      component: addProject
+      component: addProject,
+      meta: {
+        requiresAuth: true,
+      }
     },
     {
        path: '/update/:Pid',
        name: 'updateProject',
-       component: updateProject
+       component: updateProject,
+       meta: {
+        requiresAuth: true,
+      }
      },
      {
       path: '/tags',
@@ -52,17 +62,39 @@ export default new Router({
     {
       path: '/signup',
       name: 'signup',
-      component: Signup
+      component: Signup,
+      meta: {
+        requiresVisitor: true,
+      }
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: Login,
+      meta: {
+        requiresVisitor: true,
+      }
     },
     {
       path: '/logout',
       name: 'logout',
-      component: Logout
+      component: Logout,
+      meta: {
+        requiresAuth: true,
+      }
+    },
+    {
+      path: '/show/:Pid/addreview',
+      name: 'AddReview',
+      component: AddReview,
+      meta: {
+        requiresAuth: true,
+      }
+    },
+    {
+      path: '/show/:Pid/GetReviews',
+      name: 'GetReviews',
+      component: GetReviews,
     },
     
     {

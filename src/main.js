@@ -7,6 +7,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './plugins/element.js'
 import store from '../store.js'
+import StarRating from 'vue-star-rating'
+
+
 
 
 
@@ -14,11 +17,33 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!store.getters.loggedIn) {
+      next({
+        name: 'login',
+      })
+    } else {
+      next()
+    }
+  } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+    if (store.getters.loggedIn) {
+      next({
+        name: 'home',
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
 
 Vue.config.productionTip = false
 
 new Vue({
-  router,
-  store,
+  el: '#app',
+  router: router,
+  store: store,
   render: h => h(App)
 }).$mount('#app')
