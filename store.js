@@ -14,6 +14,11 @@ export default new Vuex.Store({
     user : {}
     
   },
+  getters : {
+    loggedIn(state) {
+      return state.token !== null
+    }
+  },
   mutations: {
     retrieveToken(state, token) {
       state.token = token
@@ -42,10 +47,23 @@ export default new Vuex.Store({
         })
       }
     },
-  },
-  getters : {
-    loggedIn(state) {
-      return state.token !== null
-    }
+    retrieveToken(context, credentials) {
+      return new Promise((resolve, reject) => {
+        axios.post('/login', {
+          email: credentials.email,
+          password: credentials.password,
+        })
+          .then(response => {
+            const token = response.data.access_token
+            localStorage.setItem('token', token)
+            context.commit('retrieveToken', token)
+            resolve(response)
+          })
+          .catch(error => {
+            console.log(error)
+            reject(error)
+          })
+      })
+    },
   },
 })
