@@ -14,10 +14,7 @@
     width: 16%;
 ">
 
-          <div>
-            <p>{{this.user}}
-              </p>
-              </div>
+          <div><p>{{this.user}}</p></div>
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">

@@ -16,6 +16,12 @@
                     <div class='project-description'>DESCRIPTION :{{project.description}}</div>
                     <div class='project-tags'>TAGS :{{project.tags}}</div>
                     <div class='project-date'>DATE :{{project.created}}</div>
+            
+                    <div class='test'>Exprire in {{this.remainingdays}} Days </div>
+
+
+                    <div class='project-date'>Money Raised:  {{project.sumOfPledges}} / {{project.pledgeObjective}}$</div>
+                    <el-progress :text-inside="false" :stroke-width="18" :percentage=Math.floor(((project.sumOfPledges)/(project.pledgeObjective)*100)) color="rgba(142, 113, 199, 0.7)"></el-progress>
 
                     <button @click='update(proId)' class='update btn'>update</button> 
 
@@ -90,7 +96,8 @@
         return {
         proId:this.$route.params.Pid,
         title:"show",
-        project: []
+        project: [],
+        remainingdays: 0
          };
     },
   
@@ -106,6 +113,11 @@
             .then(response => {
                 let data = response.data;
                 console.log('show-data-fetche',data)
+                var date1 = new Date(data.expireAt)
+                console.log('expireAt', date1)
+                var date2 = new Date (Date.now())
+                console.log('datenow', date2)
+                this.remainingdays = Math.round(Math.abs((date2.getTime() - date1.getTime()) / (24 * 60 * 60 * 1000)))
                 this.project = data 
             });
         },

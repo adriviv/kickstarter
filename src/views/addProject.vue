@@ -16,6 +16,10 @@
             <input v-model="projectDescription" type="text" id="inputDescription" class="form-control" placeholder="Project Description" required autofocus>
             <label for="inputDescription">Description of the project</label>
           </div>
+            <div class="form-label-group">
+            <input v-model="pledgeObjective" type='number' id="inputPledgeObjective" class="form-control" placeholder="Objective to raise" required autofocus>
+            <label for="inputPledgeObjective">Obejctif of money to raise</label>
+          </div>
 
           <div class="form-label-group">
             <el-checkbox-group v-model="checkList">
@@ -64,7 +68,8 @@ export default {
     projectName: '',
     projectDescription:'',
     checkList: [],
-    photo: ''
+    photo: '', 
+    pledgeObjective: ''
     };
   },
 
@@ -82,7 +87,8 @@ export default {
             data: { name: this.projectName,
             description: this.projectDescription,
             tags: this.checkList,
-            photo: this.photo}
+            photo: this.photo,
+            pledgeObjective: this.pledgeObjective}
             })
       .then(response => {
           console.log('addproject', response),
