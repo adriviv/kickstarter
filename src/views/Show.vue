@@ -38,6 +38,14 @@
                            <span>Paris - france</span> 
                         </a>
                     </div>
+                     <div class='footer-image'>
+                         <a :href="`/show/${proId}/addreview`">
+                           <span>Add a Review</span> 
+                        </a>
+                        <a :href="`/show/${proId}/GetReviews`">
+                           <span>See Reviews</span> 
+                        </a>
+                    </div>
                 </div>
                 <div class='project-details-right'>
                     <div class="pledge-sub-box">
@@ -51,7 +59,9 @@
                         <div>29</div>
                         <div>Days before the end</div>
                     </div>
-                    <el-button type="success">I support this project</el-button>
+                         <a :href="`/show/${proId}/Pledge`">
+                           <span>I support this project</span> 
+                        </a>
                     <div class="pledge-sub-box2">
                         <el-button>Remind</el-button>
                         <div class='icons-share'>

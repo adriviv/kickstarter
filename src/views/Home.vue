@@ -64,7 +64,7 @@ export default {
 
     loadData() {
     axios
-      .get("projects")
+      .get("/projects")
       .then(response => {
         this.projects = response.data.projects 
         console.log('index-list', this.projects)

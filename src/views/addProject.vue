@@ -82,7 +82,7 @@ export default {
             data: { name: this.projectName,
             description: this.projectDescription,
             tags: this.checkList,
-            photo: this.uploadFieldName}
+            photo: this.photo}
             })
       .then(response => {
           console.log('addproject', response),
