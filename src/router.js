@@ -12,6 +12,8 @@ import Logout from './views/Logout.vue'
 import AddReview from './views/AddReview.vue'
 import GetReviews from './views/GetReviews.vue'
 import Pledge from './views/Pledge.vue'
+import Dashboard from './views/Dashboard.vue'
+
 
 
 // TO project tHe routes (auth/not auth) => 
@@ -101,6 +103,14 @@ export default new Router({
       path: '/show/:Pid/Pledge',
       name: 'Pledge',
       component: Pledge,
+      meta: {
+        requiresAuth: true,
+      }
+    },
+    {
+      path: '/Dashboard',
+      name: 'Dashboard',
+      component: Dashboard,
       meta: {
         requiresAuth: true,
       }

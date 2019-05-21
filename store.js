@@ -11,8 +11,8 @@ export default new Vuex.Store({
   state: {
     status: '',
     token: localStorage.getItem('token') || null,
-    user : {}
-    
+    user: localStorage.getItem('user') || null
+
   },
   getters : {
     loggedIn(state) {
@@ -36,6 +36,7 @@ export default new Vuex.Store({
           .then(response => {
             console.log('Are you disconected?', response)
             localStorage.removeItem('token')
+            localStorage.removeItem('user')
             context.commit('destroyToken')
             resolve(response)
           })
@@ -54,8 +55,12 @@ export default new Vuex.Store({
           password: credentials.password,
         })
           .then(response => {
-            const token = response.data.access_token
+            console.log('ni', response)
+            const token = response.data.hash
+            const user = {first_name: response.data.first_name, last_name: response.data.last_name, email: response.data.email}
+            console.log('test user', user)
             localStorage.setItem('token', token)
+            localStorage.setItem('user', JSON.stringify(user))
             context.commit('retrieveToken', token)
             resolve(response)
           })

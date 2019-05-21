@@ -14,7 +14,7 @@
     width: 16%;
 ">
 
-          <div><p>{{this.user}}</p></div>
+          <!-- <div><p>{{this.user.first_name}}</p></div> -->
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
@@ -31,7 +31,7 @@
           <b-dropdown-item href="#">Projects Saved</b-dropdown-item>
           <b-dropdown-item href="#">Only for me</b-dropdown-item>
           <b-dropdown-item href="#">Subscriptions</b-dropdown-item>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
+          <b-dropdown-item href="/Dashboard">Profile</b-dropdown-item>
           <b-dropdown-item href="#">Parameters</b-dropdown-item>
           <b-dropdown-item href="#">Messages</b-dropdown-item>
           <b-dropdown-item href="#">Activity</b-dropdown-item>
@@ -56,7 +56,6 @@ import { Store } from 'vuex'
     name: 'Navbar',
     data() {
       return {
-        user: this.$store.state.userInfos,
     };
   },
 
