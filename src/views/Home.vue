@@ -10,6 +10,14 @@
         <img :src=" project.image " class="image">
         <div style="padding: 14px;">          
           <h3 @click="goTodetail(project._id)" >{{project.name}}</h3>
+         <!-- <h3  @click="addToFavortites(project._id)" >Add To favorites</h3> -->
+
+           
+           <h3 @click="addToFavortites(project._id)"  v-if="project.author.hearts.length === 0 " >Add To favorites</h3>
+            <h3 @click="addToFavortites(project._id)" v-if="project.author.hearts.length === 1 "  >Remove To favorites</h3>
+          
+          <!-- <h3 v-if="this.heart !== ''"  @click="addToFavortites(project._id)" >REMOVE To favorites</h3> -->
+
           <div class="bottom clearfix">
             <div class="description">{{ project.description }}</div>
             <div class='createdAt'> created at {{ project.created }}</div>
@@ -47,6 +55,7 @@ export default {
     projects: [],
     title:"home", 
     user: localStorage.getItem('token'),
+    hearts: '', 
 
 
     };
@@ -70,11 +79,19 @@ export default {
         console.log('index-list', this.projects)
        });
     },
+    addToFavortites(proId) {
+      axios
+      .post(`api/stores/${proId}/heart`, {
+      })
+      .then(response => {
+        console.log('response favorites', response);
+        this.hearts =  response.data.hearts
+        console.log('tes heart', this.hearts)
+       });
+    }, 
   }
 };
 </script>
-
-
 
 
 

@@ -57,7 +57,7 @@ export default new Vuex.Store({
           .then(response => {
             console.log('ni', response)
             const token = response.data.hash
-            const user = {first_name: response.data.first_name, last_name: response.data.last_name, email: response.data.email}
+            const user = {first_name: response.data.first_name, last_name: response.data.last_name, email: response.data.email, gravatar: response.data.gravatar}
             console.log('test user', user)
             localStorage.setItem('token', token)
             localStorage.setItem('user', JSON.stringify(user))

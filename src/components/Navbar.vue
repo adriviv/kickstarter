@@ -22,10 +22,9 @@
           <b-form-input v-model='search' @keyup="searchFunction()" size="sm" class="mr-sm-2" id='btn-search' placeholder="Search"></b-form-input>
         </b-nav-form>
 
-
         <b-nav-item-dropdown v-if="loggedIn" right>
           <template slot="button-content">
-            <img class="avatar" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
+            <img class="avatar" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-bind:src="user.gravatar" />
           </template>
           <b-dropdown-item >Your Account</b-dropdown-item>
           <b-dropdown-item href="#">Projects Saved</b-dropdown-item>
@@ -66,7 +65,9 @@ import axios from "axios";
       return {
         search: '', 
         projects: [], 
-        limitationList:4
+        limitationList:4, 
+        user: JSON.parse(localStorage.getItem('user')),
+
     };
   },
 
