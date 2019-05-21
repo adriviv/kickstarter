@@ -24,8 +24,6 @@
                     <div class='project-date'>Money Raised:  {{project.sumOfPledges}} / {{project.pledgeObjective}}$</div>
                     <el-progress :text-inside="false" :stroke-width="18" :percentage=Math.floor(((project.sumOfPledges)/(project.pledgeObjective)*100)) color="rgba(142, 113, 199, 0.7)"></el-progress>
 
-                    <button @click='update(proId)' class='update btn'>update</button> 
-
                 </div>
             </div>
 
@@ -121,10 +119,6 @@
                 this.remainingdays = Math.round(Math.abs((date2.getTime() - date1.getTime()) / (24 * 60 * 60 * 1000)))
                 this.project = data 
             });
-        },
-
-        update(proId) {
-             this.$router.push({name:'updateProject',params:{_id:proId}})
         },
     },
 }
