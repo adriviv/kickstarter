@@ -7,7 +7,7 @@
             <div class='header'>
                 <div class='header-left'>
                     <img class="avatar" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
-                    <div class='user-name'> By blablabla</div>
+                    <div class='user-name'> By {{project.author.first_name}} - {{project.author.last_name}}</div>
                     <div class='project-number'>X project created</div>
                     <el-button class='follow-btn' type="info" plain>Follow this Creator</el-button>
                 </div>

@@ -19,7 +19,7 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-form>
-          <b-form-input size="sm" class="mr-sm-2" id='btn-search' placeholder="Search"></b-form-input>
+          <b-form-input v-model='search' @keyup="searchFunction()" size="sm" class="mr-sm-2" id='btn-search' placeholder="Search"></b-form-input>
         </b-nav-form>
 
 
@@ -45,17 +45,28 @@
       </b-navbar-nav>
        </b-collapse>
   </b-navbar>
+
+
+    <div v-for="(project, index) in projects"  :key="project._id" v-if="projects && projects.length > 0 && index <= limitationList"> 
+      <h3 @click="goTodetail(project._id)" >{{project.name}}</h3>
+      <div class="description">{{ project.description }}</div>
+    </div>
 </div>
+
 
 </template>
 
 <script>
 import { Store } from 'vuex'
+import axios from "axios";
 
   export default {
     name: 'Navbar',
     data() {
       return {
+        search: '', 
+        projects: [], 
+        limitationList:4
     };
   },
 
@@ -68,6 +79,19 @@ import { Store } from 'vuex'
     methods: {
       gohome: function() {
         window.location.href = 'http://localhost:8080/' 
+      },
+    
+    searchFunction: function() {
+      axios
+      .post("/searchProject", {
+        searchKeyword: this.search
+      })
+      .then(response => {
+          console.log('la réponse', response)
+          this.projects = response.data
+
+        // console.log('index-list', this.projects)
+       });
       },
     },
   };
