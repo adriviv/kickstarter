@@ -16,19 +16,20 @@
 .category {
   display: flex;
   justify-content: space-between;
-  padding: 1.5% 9%;
+  padding: 1.5% 10%;
 
   border: 1px solid #e8e8e8;
 }
 
 .category a {
-    text-decoration: none;
- color:#656969;
+  text-decoration: none;
+    color:#656969;;
 }
 .category a:hover {
     text-decoration: none;
-    color: black;
+    color: #4b9f75;
     font-weight: bold;
+    border-bottom: 3px solid #4b9f75;
     transition: 0.5s;
 }
 </style>

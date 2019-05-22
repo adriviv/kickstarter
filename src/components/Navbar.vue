@@ -10,7 +10,7 @@
       </b-navbar-nav>
    
 
-<img @click="gohome()" id="logo" src="../assets/kickstarter-logo-color.png"  alt="" style="
+<img @click="gohome()" class=''id="logo" src="../assets/kickstarter-logo-color.png"  alt="" style="
     width: 16%;
 ">
 
@@ -110,9 +110,11 @@ import axios from "axios";
     border-radius: 50%;
 }
 
-.navbar-text {
-    color: black;
+ .navbar-light.navbar-nav.nav-link:focus {
+    color: #4b9f75;
 }
+
+
 #btn-search {
     border-radius: 25px;
 }
