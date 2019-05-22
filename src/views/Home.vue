@@ -4,20 +4,20 @@
     <CategoryHeader></CategoryHeader>
     
  
-  <div v-for="project in projects"  :key="project._id">
+  <div v-for="project in projects"  :key="project._id" :hearts="hearts">
     <el-row id='cardtest' >
       <el-card class='card' :body-style="{ padding: '0px' }">
         <img :src=" project.image " class="image">
         <div style="padding: 14px;">          
           <h3 @click="goTodetail(project._id)" >{{project.name}}</h3>
-         <!-- <h3  @click="addToFavortites(project._id)" >Add To favorites</h3> -->
 
+          <!-- ---------------- FAVORITES -------------- -->
+          <button v-on:click="toggle" @click="addToFavortites(project._id)" v-if="show === true && project.author.hearts.length === 0"> ADD TO FAVORITES</button>
+          <button v-on:click="toggle" @click="addToFavortites(project._id)" v-if="show === true && project.author.hearts.length === 1"> REMOVE TO FAVORITE</button>
+          <button v-if="show === false && hearts.length === 0" @click="addToFavortites(project._id)">ADD TO FAVORITES</button>
+          <button v-if="show === false && hearts.length === 1" @click="addToFavortites(project._id)">REMOVE TO FAVORITE</button>
+           <!-- -------------------------- --------------- -->
            
-           <h3 @click="addToFavortites(project._id)"  v-if="project.author.hearts.length === 0 " >Add To favorites</h3>
-            <h3 @click="addToFavortites(project._id)" v-if="project.author.hearts.length === 1 "  >Remove To favorites</h3>
-          
-          <!-- <h3 v-if="this.heart !== ''"  @click="addToFavortites(project._id)" >REMOVE To favorites</h3> -->
-
           <div class="bottom clearfix">
             <div class="description">{{ project.description }}</div>
             <div class='createdAt'> created at {{ project.created }}</div>
@@ -27,6 +27,7 @@
       </el-card>
     </el-row>
   </div>
+
 
 
 
@@ -55,7 +56,9 @@ export default {
     projects: [],
     title:"home", 
     user: localStorage.getItem('token'),
-    hearts: '', 
+    hearts: [], 
+    show: true
+
 
 
     };
@@ -86,9 +89,12 @@ export default {
       .then(response => {
         console.log('response favorites', response);
         this.hearts =  response.data.hearts
-        console.log('tes heart', this.hearts)
+        console.log('test heart', this.hearts)
        });
     }, 
+    toggle: function() {
+      this.show = false;
+    },
   }
 };
 </script>
