@@ -115,7 +115,6 @@ export default new Router({
         requiresAuth: true,
       }
     },
-    
     {
       path: '/about',
       name: 'about',

@@ -10,9 +10,6 @@ import store from '../store.js'
 import StarRating from 'vue-star-rating'
 
 
-
-
-
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
