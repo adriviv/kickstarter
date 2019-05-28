@@ -10,6 +10,20 @@ Vue.use(BootstrapVue)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+
+import VueMq from 'vue-mq'
+ 
+Vue.use(VueMq, {
+  breakpoints: { // default breakpoints - customize this
+    vsm: 576,
+    sm: 768,
+    md: 1250,
+    lg: Infinity,
+  },
+  defaultBreakpoint: 'sm' // customize this for SSR
+})
+
+
 import Vuex from 'vuex'
 Vue.use(Vuex)
 

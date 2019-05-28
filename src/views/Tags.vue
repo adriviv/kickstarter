@@ -61,7 +61,6 @@ export default {
         navigateTo(tagId) {
             //console.log(tagId)
             this.$router.push({name:'tag',params:{tag:tagId}})
-
         }
     },
 };

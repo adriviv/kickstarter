@@ -125,6 +125,9 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
+.test {
+  display: flex;
+}
 .container1{
   padding-right:3%;
   padding-left:3%;
