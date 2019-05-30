@@ -10,31 +10,27 @@
       </b-navbar-nav>
    
 
-<img @click="gohome()" id="logo" src="../assets/kickstarter-logo-color.png"  alt="" style="
+<img @click="gohome()" class=''id="logo" src="../assets/kickstarter-logo-color.png"  alt="" style="
     width: 16%;
 ">
 
-          <div>
-            <p>{{this.user}}
-              </p>
-              </div>
+          <!-- <div><p>{{this.user.first_name}}</p></div> -->
 
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-form>
-          <b-form-input size="sm" class="mr-sm-2" id='btn-search' placeholder="Search"></b-form-input>
+          <b-form-input v-model='search' @keyup="searchFunction()" size="sm" class="mr-sm-2" id='btn-search' placeholder="Search"></b-form-input>
         </b-nav-form>
-
 
         <b-nav-item-dropdown v-if="loggedIn" right>
           <template slot="button-content">
-            <img class="avatar" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
+            <img class="avatar" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-bind:src="user.gravatar" />
           </template>
           <b-dropdown-item >Your Account</b-dropdown-item>
           <b-dropdown-item href="#">Projects Saved</b-dropdown-item>
           <b-dropdown-item href="#">Only for me</b-dropdown-item>
           <b-dropdown-item href="#">Subscriptions</b-dropdown-item>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
+          <b-dropdown-item href="/Dashboard">Profile</b-dropdown-item>
           <b-dropdown-item href="#">Parameters</b-dropdown-item>
           <b-dropdown-item href="#">Messages</b-dropdown-item>
           <b-dropdown-item href="#">Activity</b-dropdown-item>
@@ -48,18 +44,30 @@
       </b-navbar-nav>
        </b-collapse>
   </b-navbar>
+
+
+    <div v-for="(project, index) in projects"  :key="project._id" v-if="projects && projects.length > 0 && index <= limitationList"> 
+      <h3 @click="goTodetail(project._id)" >{{project.name}}</h3>
+      <div class="description">{{ project.description }}</div>
+    </div>
 </div>
+
 
 </template>
 
 <script>
 import { Store } from 'vuex'
+import axios from "axios";
 
   export default {
     name: 'Navbar',
     data() {
       return {
-        user: this.$store.state.userInfos,
+        search: '', 
+        projects: [], 
+        limitationList:4, 
+        user: JSON.parse(localStorage.getItem('user')),
+
     };
   },
 
@@ -72,6 +80,19 @@ import { Store } from 'vuex'
     methods: {
       gohome: function() {
         window.location.href = 'http://localhost:8080/' 
+      },
+    
+    searchFunction: function() {
+      axios
+      .post("/searchProject", {
+        searchKeyword: this.search
+      })
+      .then(response => {
+          console.log('la réponse', response)
+          this.projects = response.data
+
+        // console.log('index-list', this.projects)
+       });
       },
     },
   };
@@ -89,9 +110,11 @@ import { Store } from 'vuex'
     border-radius: 50%;
 }
 
-.navbar-text {
-    color: black;
+ .navbar-light.navbar-nav.nav-link:focus {
+    color: #4b9f75;
 }
+
+
 #btn-search {
     border-radius: 25px;
 }

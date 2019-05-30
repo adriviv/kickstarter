@@ -105,7 +105,7 @@ export default {
       .then(data => {  
         console.log('user reponse',data)
         if (data.status == '200') {
-        this.$router.replace({ name: "home" });
+        this.$router.push({ name: "home" });
          }
       });
     }

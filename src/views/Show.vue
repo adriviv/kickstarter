@@ -1,96 +1,94 @@
 <template>
     <div class="show">
-        <Navbar> </Navbar>
-        <!-- <h2>the product id is :{{this.$route.params.Pid}}</h2> -->
+        <Navbar></Navbar>
+        <showSmallBanner
+            :projectName = project.name
+            :projectDescription = project.description
+            :gravatar = project.author.gravatar
+            :authorFirstName = project.author.first_name
+            :authorLastName = project.author.last_name
+            :percentage = Math.floor(((project.sumOfPledges)/(project.pledgeObjective)*100))
+            :pledge = project.sumOfPledges
+            :pledgeObjective = project.pledgeObjective
+            :numberOfContributors = contributor
+            :expireAt = remainingdays
+            :tags = project.tags[0]
+            :location = location
+            v-on:goToTags="goToTags(project.tags[0])"
+            v-on:addPledge="addPledge(project._id)"
+        ></showSmallBanner>
 
-        <div class='project-container'>
-            <div class='header'>
-                <div class='header-left'>
-                    <img class="avatar" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
-                    <div class='user-name'> By blablabla</div>
-                    <div class='project-number'>X project created</div>
-                    <el-button class='follow-btn' type="info" plain>Follow this Creator</el-button>
-                </div>
-                <div class='header-right'>
-                    <div class='project-name'> PORJECT NAME: {{project.name}}</div>
-                    <div class='project-description'>DESCRIPTION :{{project.description}}</div>
-                    <div class='project-tags'>TAGS :{{project.tags}}</div>
-                    <div class='project-date'>DATE :{{project.created}}</div>
+        <div class='separator'></div>
+        
+        <b-container>
+            <b-row class='navbar-2'>
+                    <b-col @click="showCampaign" class=navbar-links>Campaign</b-col>
+                    <b-col @click="showFaq" class=navbar-links>FAQ</b-col>
+                    <b-col @click="showUpdates" class=navbar-links>Updates</b-col>
+                    <b-col @click="showComments" class=navbar-links>Comment</b-col>
+                    <b-col @click="showCommunity" class=navbar-links>Community</b-col>                    
+                    <b-col  sm="6" md="6" lg="6" class='navbar-btn'>
+                        <button class='pledge-btn'>Back this project</button>
+                        <button class='remind-btn'><i class="fas fa-heart"></i> Remind me </button>
+                    </b-col>
+                </b-row>
+            </b-container>
+           
+        <div class='separator'></div>
 
-                    <button @click='update(proId)' class='update btn'>update</button> 
+   
 
-                </div>
-            </div>
+            <div v-if="Campaign ===true">
+                <b-container> 
+                    <b-row class='campaign-sub-div'>
+                        <b-col cols="6" class='campaign-left'>
+                            <img src="https://source.unsplash.com/random" alt="">
+                            <p>UPDATE: I have reached my first goal! I have created a stretch goal so I can put up a billboard in Ohio. Right now, American women are facing yet another surge in right-wing, reactionary efforts to control their bodies. This time, legislatures in Alabama, Missouri, Georgia, Ohio and others states have recently passed highly restrictive laws aimed at bringing a case to the now stacked conservative Supreme Court in a calculated effort to overturn Roe v Wade. We must answer with the voice of the majority! I will be responding by placing a billboard in Birmingham, Alabama that speaks to everyone. Your body is your business... and not the business of a hyper-conservative legislature made up mostly of men. Please help support this effort by donating to this Kickstarter. If we surpass the goal, any overage (up to double) will be sent to NARAL Pro-Choice America. If we double the goal, I'll put up a billboard in Ohio.</p>
+                        </b-col>
+                        <b-col cols="6">
+                            <pledgeShowCard></pledgeShowCard>                                                                                     
+                        </b-col>
+                    </b-row>
+                </b-container>
+            </div> 
 
-            <div class='project-details'>
-                <div class='project-details-left'>
-                    <div>
-                        <img src="https://source.unsplash.com/random" alt="" mode="aspectFill">
-                    </div>
-                    <div class='footer-image'>
-                        <a href="#">
-                           <span>Our Favorites</span> 
-                        </a>
-                          <a href="#">
-                           <span>Product Design</span> 
-                        </a>
-                         <a href="#">
-                           <span>Paris - france</span> 
-                        </a>
-                    </div>
-                     <div class='footer-image'>
-                         <a :href="`/show/${proId}/addreview`">
-                           <span>Add a Review</span> 
-                        </a>
-                        <a :href="`/show/${proId}/GetReviews`">
-                           <span>See Reviews</span> 
-                        </a>
-                    </div>
-                </div>
-                <div class='project-details-right'>
-                    <div class="pledge-sub-box">
-                        <div>US$ 120k</div>
-                        <div>Committed to a goal of US $ 10,000</div>
-                    </div>
-                     <div class="pledge-sub-box">
-                        <div>1021</div>
-                        <div>Contributors</div>
-                    </div> <div class="pledge-sub-box">
-                        <div>29</div>
-                        <div>Days before the end</div>
-                    </div>
-                         <a :href="`/show/${proId}/Pledge`">
-                           <span>I support this project</span> 
-                        </a>
-                    <div class="pledge-sub-box2">
-                        <el-button>Remind</el-button>
-                        <div class='icons-share'>
-                            <a href="#">Twitter</a>
-                            <a href="#">Mail</a>
-                            <a href="#">Snippet</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <div v-if="FAQ === true">FAQ</div>
+            <div v-if="Updates === true">UPD</div>
+            <div v-if="Comments === true">Comments</div>
+            <div v-if="Community === true">Community</div>                                    
     </div>
 </template>
 
 <script>
     import Navbar from "@/components/Navbar";
     import axios from "axios";
+    import showSmallBanner from "@/components/Banner/showSmallBanner";
+    import pledgeShowCard from "@/components/Cards/pledgeShowCard";
+
+
 
 
     export default {
         name: "show",
         components: {
-            Navbar
+            Navbar,
+            showSmallBanner,
+            pledgeShowCard,
+
         },
     data() {
         return {
         proId:this.$route.params.Pid,
         title:"show",
-        project: []
+        project: [],
+        remainingdays: 0,
+        contributor: 0,
+        location: "undefined",
+        Campaign: true, 
+        FAQ: false, 
+        Updates: false, 
+        Comments: false, 
+        Community: false
          };
     },
   
@@ -106,89 +104,116 @@
             .then(response => {
                 let data = response.data;
                 console.log('show-data-fetche',data)
+                var date1 = new Date(data.expireAt)
+                var date2 = new Date (Date.now())
+                this.contributor = data.pledges.length
+                this.remainingdays = Math.round(Math.abs((date2.getTime() - date1.getTime()) / (24 * 60 * 60 * 1000)))
                 this.project = data 
             });
         },
-
-        update(proId) {
-             this.$router.push({name:'updateProject',params:{_id:proId}})
+        goToTags(tagId) {
+            //console.log('test tag',tagId)
+             this.$router.push({name:'tag',params:{tag:tagId}})
+        },
+        addPledge(projectId){
+            console.log('test Pledge', projectId )
+            this.$router.push({name: 'Pledge', params:{Pid: projectId}})
+        },
+        showCampaign: function() {
+            this.Campaign=true
+            this.FAQ=false
+            this.Updates=false
+            this.Comments=false
+            this.Community=false
+        },
+        showFaq: function(){
+             this.Campaign=false
+            this.FAQ=true
+            this.Updates=false
+            this.Comments=false
+            this.Community=false
+        }, 
+        showUpdates: function (){
+            this.Campaign=false
+            this.FAQ=false
+            this.Updates=true
+            this.Comments=false
+            this.Community=false
+        },
+        showComments: function (){
+            this.Campaign=false
+            this.FAQ=false
+            this.Updates=false
+            this.Comments=true
+            this.Community=false
+        },
+        showCommunity: function (){
+            this.Campaign=false
+            this.FAQ=false
+            this.Updates=false
+            this.Comments=false
+            this.Community=true
         },
     },
 }
 </script>
 
 <style>
-    .project-container {
-        background-color:#FBFBFA ;
-        padding-left: 60px;
-        padding-right: 60px;
-        padding-top: 54px;
-    }
-    .header {
-        height: 300px;
-        display: flex;
-        margin: 0 18px 36px;
-    }
-    .header-left {
-        padding: 0px 18px;
-        margin: 0px 0px 18px; 
-    }
-    .header-right {
-        padding: 0px 18px;
-    }
-    .user-name {
-        word-break: break-word;
-        margin-left: 0rem;
-        color: #282828;
-        font-size: 14px;
-    }
-    .project-number {
-        color: #656969;
-        font-size: 14px;
-    }
-    .project-name {
-        margin-bottom:1.8rem;
-        font-weight: 500;
-        color: #282828;
-        font-size: 3.8rem;
-        line-height: 4.2rem;
-    }
-    .follow-btn {
-        padding: 0 1.2rem;
-        font-size: 1.2rem;
-    }
-    .project-description {
-        color: #656969;
-        font-size: 1.8rem;
-        line-height: 2.4rem;
-        margin-bottom: 20px;
-    }
-    .project-details {
-        display: flex; 
-    }
-     .project-details-left {
-        width: 66%;
-    }
-    .project-details-right {
-        width: 34%;
-    }
-   .project-details-left img {
-    vertical-align: middle;
-    border-style: none;
-    width: 65rem;
-    height: 30rem;
-    }
-    .footer-image {
+
+.separator {  
+    border-top: 1px solid #dcdedd;
+
+}
+.navbar-2 {
+    padding: 1em 0;
+}
+
+
+.navbar-links {
+    font-size: calc(10px + 0.5vw);
+    text-align: center;
+    padding-bottom: 1em;
+}
+
+
+.navbar-btn {
     display: flex;
-    justify-content: space-between;
-    padding: 15px 35px; 
-    }
-   .pledge-sub-box2{
-       display: flex;
-       justify-content: space-between;
-   }
-    .icons-share{
-        display: flex; 
-        justify-content: space-between;
-    }
+     font-size: 15px;
+}
+
+.pledge-btn {
+    padding: 10px 40px;
+}
+.remind-btn {
+    margin-left: 1em;
+    padding: 10px 40px;
+}
+
+.pledge-btn {
+    color: white;
+    background-color: #4b9f75; 
+}
+
+.pledge-btn:hover {
+    background-color: #377766; 
+}
+
+.remind-btn {
+    border: none; 
+    color: #a298a1;
+}
+
+.remind-btn:hover {
+    color: black;
+}
+.campaign-sub-div {
+    padding: 1em 0;
+}
+.campaign-left img{
+    width: 100%;
+    padding-bottom: 1em;
+}
+.campaign-left p{
+    font-size: calc(10px + 0.6vw)
+}
 </style>

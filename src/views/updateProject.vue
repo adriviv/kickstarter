@@ -103,7 +103,7 @@ export default {
             })
       .then(response => {
           console.log('addproject', response)
-          window.location.href = 'http://localhost:8080/'      
+          window.location.href = 'http://localhost:8080/Dashboard'      
           });
     },
   },

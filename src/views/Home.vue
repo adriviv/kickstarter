@@ -2,36 +2,68 @@
   <div class="home">
     <Navbar></Navbar>
     <CategoryHeader></CategoryHeader>
-    
+
+<!-- ============= FONT ASEWOME =============  -->
+    <link rel="stylesheet" 
+        href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" 
+        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" 
+        crossorigin="anonymous">
+
+<!-- ============= FIRST DIV =============  -->
+  <div class='first-div row'>
+    <div class='col-sm-12 col-md-6 col-lg-6'>
+      <h5>PROJET SÉLECTIONNÉ</h5>
+      <Bigcard
+      v-for="project in projects.slice(0, 1)"  :key="project._id"
+      :projectName = project.name
+      :projectDescription = project.description
+      :authorFirstName = project.author.first_name
+      :authorLastName = project.author.last_name
+      :percentage= Math.floor(((project.sumOfPledges)/(project.pledgeObjective)*100))
+      :isFavorite = (project.author.hearts.includes(project._id))
+      v-on:goToDetail="goTodetail(project._id)"
+      v-on:addToFavortites="addToFavortites(project._id)"
+      ></Bigcard>
+    </div>
+    <div class='first-div-right col-sm-12 col-md-6 col-lg-6'>
+      <h5>RIEN QUE POUR VOUS</h5>
+      <Smallcard
+        v-for="project in projects.slice(1, 4)"  :key="project._id"
+        :projectName = project.name
+        :authorFirstName = project.author.first_name
+        :authorLastName = project.author.last_name
+        :sumOfPledges = project.sumOfPledges
+        :pledgeObjective = project.pledgeObjective
+        :isFavorite = (project.author.hearts.includes(project._id))
+        v-on:goToDetail="goTodetail(project._id)"
+        v-on:addToFavortites="addToFavortites(project._id)"
+      ></Smallcard>
+      <a href="#">Plus de projets</a>
+    </div>
+  </div>    
+<BirthdayCard></BirthdayCard>
+<NewsletterBanner></NewsletterBanner>
+<!-- ============= SECOND DIV =============  -->
+
+<!-- ============= THIRD DIV =============  -->
  
-  <div v-for="project in projects"  :key="project._id">
-    <el-row id='cardtest' >
-      <el-card class='card' :body-style="{ padding: '0px' }">
-        <img :src=" project.image " class="image">
-        <div style="padding: 14px;">          
-          <h3 @click="goTodetail(project._id)" >{{project.name}}</h3>
-          <div class="bottom clearfix">
-            <div class="description">{{ project.description }}</div>
-            <div class='createdAt'> created at {{ project.created }}</div>
-            <a href="#" class="owner">By To define</a>
-          </div>
-        </div>
-      </el-card>
-    </el-row>
-  </div>
+<!-- ============= FOURTH DIV =============  -->
 
 
-
-
-  </div>
+<!-- ============= FOOTER =============  -->
+  <Footer></Footer>
+</div>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar";
 import axios from "axios";
 import CategoryHeader from "@/components/CategoryHeader";
-
-
+import Footer from "@/components/Footer";
+import Bigcard from "@/components/Cards/Bigcard";
+import Smallcard from "@/components/Cards/Smallcard";
+import BirthdayCard from "@/components/Cards/BirthdayCard";
+import NewsletterBanner from "@/components/Banner/newsletterBanner";
 
 
 
@@ -39,16 +71,19 @@ export default {
   name: "home",
   components: {
     Navbar,
-    CategoryHeader
+    CategoryHeader,
+    Footer,
+    Bigcard,
+    Smallcard,
+    BirthdayCard,
+    NewsletterBanner,
   },
 
   data() {
     return {
     projects: [],
     title:"home", 
-    user: localStorage.getItem('token'),
-
-
+    user: localStorage.getItem('token')
     };
   },
 
@@ -62,6 +97,8 @@ export default {
       this.$router.push({name:'show',params:{Pid:proId}})
       },
 
+   
+
     loadData() {
     axios
       .get("/projects")
@@ -70,77 +107,59 @@ export default {
         console.log('index-list', this.projects)
        });
     },
+    addToFavortites(proId) {
+      axios
+      .post(`api/stores/${proId}/heart`, {
+      })
+      .then(response => {
+        console.log('la reponse', response),
+        window.location.reload(true)
+       });
+    }, 
   }
 };
 </script>
 
 
 
-
-
 <style>
-.card {
-    width: 331px;
-  
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+.test {
+  display: flex;
+}
+.container1{
+  padding-right:3%;
+  padding-left:3%;
+
+}
+/* =================  FIRST DIV  ==========================*/
+.first-div{
+  display: flex; 
+  justify-content: space-between;
+  margin-bottom: 50px;
+  margin-top: 65px;
+  border-bottom: 1px solid #e8e8e8
+}
+
+.first-div h5{
+  padding: 20px;
+}
+
+.first-div-right {
+  margin-bottom: 2%;
+  padding-left: 50px;
 }
 
 
-.title {
-    display: flex;
-    justify-content: space-around; 
-    font-size: 20px;
-    text-decoration: none;
-    color: black; 
-    font-family: Helvetica, Arial, sans-serif;
+.first-div-right a {
+  padding: 5%;
 }
 
-.title:hover {
-    text-decoration: none; 
-    font-size: 24px; 
-    font-weight: bold; 
-    color: #397765; 
-    transition: 0.3s;
-    font-family: Helvetica, Arial, sans-serif;
-}
 
-  .description {
-    font-size: 15px;
-    color:#282828;
-  }
 
-.owner{
-    color: gray;
-    text-decoration: none;
-}
-.owner:hover{
-    color: #959794;
-    font-weight: bolder;
-    text-decoration: none;
-}
-  .bottom {
-    margin-top: 13px;
-    line-height: 12px;
-  }
 
- 
 
-  .image {
-    width: 331px;
-    height: 60px;
-
-  }
-
-.clearfix:before,
-  .clearfix:after {
-      display: table;
-      content: "";
-  }
-
-  .clearfix:after {
-      clear: both
-  }
-
-/* ========================================================= */
 
 
 </style>
