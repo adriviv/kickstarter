@@ -43,14 +43,7 @@
   </div>    
 <BirthdayCard></BirthdayCard>
 <NewsletterBanner></NewsletterBanner>
-<!-- ============= SECOND DIV =============  -->
 
-<!-- ============= THIRD DIV =============  -->
- 
-<!-- ============= FOURTH DIV =============  -->
-
-
-<!-- ============= FOOTER =============  -->
   <Footer></Footer>
 </div>
 </template>
@@ -83,7 +76,6 @@ export default {
     return {
     projects: [],
     title:"home", 
-    user: localStorage.getItem('token')
     };
   },
 
@@ -91,14 +83,12 @@ export default {
    this.loadData();
   },
 
+
   methods: {
     goTodetail(proId) {
  
       this.$router.push({name:'show',params:{Pid:proId}})
       },
-
-   
-
     loadData() {
     axios
       .get("/projects")

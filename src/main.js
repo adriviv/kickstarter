@@ -17,7 +17,7 @@ Vue.use(VueMq, {
   breakpoints: { // default breakpoints - customize this
     vsm: 576,
     sm: 768,
-    md: 1250,
+    md: 950,
     lg: Infinity,
   },
   defaultBreakpoint: 'sm' // customize this for SSR

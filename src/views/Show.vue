@@ -1,22 +1,46 @@
 <template>
     <div class="show">
         <Navbar></Navbar>
-        <showSmallBanner
-            :projectName = project.name
-            :projectDescription = project.description
-            :gravatar = project.author.gravatar
-            :authorFirstName = project.author.first_name
-            :authorLastName = project.author.last_name
-            :percentage = Math.floor(((project.sumOfPledges)/(project.pledgeObjective)*100))
-            :pledge = project.sumOfPledges
-            :pledgeObjective = project.pledgeObjective
-            :numberOfContributors = contributor
-            :expireAt = remainingdays
-            :tags = project.tags[0]
-            :location = location
-            v-on:goToTags="goToTags(project.tags[0])"
-            v-on:addPledge="addPledge(project._id)"
-        ></showSmallBanner>
+
+
+        <mq-layout :mq="['vsm','sm', 'md']">
+             <showSmallBanner
+                :projectName = project.name
+                :projectDescription = project.description
+                :gravatar = project.author.gravatar
+                :authorFirstName = project.author.first_name
+                :authorLastName = project.author.last_name
+                :percentage = Math.floor(((project.sumOfPledges)/(project.pledgeObjective)*100))
+                :pledge = project.sumOfPledges
+                :pledgeObjective = project.pledgeObjective
+                :numberOfContributors = contributor
+                :expireAt = remainingdays
+                :tags = project.tags[0]
+                :location = location
+                v-on:goToTags="goToTags(project.tags[0])"
+                v-on:addPledge="addPledge(project._id)"
+            ></showSmallBanner>
+        </mq-layout>
+
+         <mq-layout :mq="['lg']">
+             <showBigBanner
+                :projectName = project.name
+                :projectDescription = project.description
+                :gravatar = project.author.gravatar
+                :authorFirstName = project.author.first_name
+                :authorLastName = project.author.last_name
+                :percentage = Math.floor(((project.sumOfPledges)/(project.pledgeObjective)*100))
+                :pledge = project.sumOfPledges
+                :pledgeObjective = project.pledgeObjective
+                :numberOfContributors = contributor
+                :expireAt = remainingdays
+                :tags = project.tags[0]
+                :location = location
+                v-on:goToTags="goToTags(project.tags[0])"
+                v-on:addPledge="addPledge(project._id)"
+            ></showBigBanner>
+        </mq-layout>  
+       
 
         <div class='separator'></div>
         
@@ -64,6 +88,7 @@
     import axios from "axios";
     import showSmallBanner from "@/components/Banner/showSmallBanner";
     import pledgeShowCard from "@/components/Cards/pledgeShowCard";
+    import showBigBanner from "@/components/Banner/showBigBanner";
 
 
 
@@ -74,6 +99,7 @@
             Navbar,
             showSmallBanner,
             pledgeShowCard,
+            showBigBanner,
 
         },
     data() {
@@ -177,8 +203,7 @@
 
 
 .navbar-btn {
-    display: flex;
-     font-size: 15px;
+     font-size: calc(8px + 1vw);
 }
 
 .pledge-btn {
