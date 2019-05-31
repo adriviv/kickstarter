@@ -13,7 +13,7 @@ import AddReview from './views/AddReview.vue'
 import GetReviews from './views/GetReviews.vue'
 import Pledge from './views/Pledge.vue'
 import Dashboard from './views/Dashboard.vue'
-
+import resetPassword from './views/resetPassword.vue'
 
 
 // TO project tHe routes (auth/not auth) => 
@@ -114,6 +114,11 @@ export default new Router({
       meta: {
         requiresAuth: true,
       }
+    },
+     {
+      path: '/account/reset/:token',
+      name: 'resetPassword',
+      component: resetPassword,
     },
     {
       path: '/about',

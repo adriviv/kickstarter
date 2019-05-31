@@ -70,10 +70,6 @@
 <script>
 export default {
     name: 'showSmallBanner',
-    data () {
-    return {
-    }
-  },
     props: ["projectName", "projectDescription", "gravatar","authorFirstName", "authorLastName", "percentage", "pledge", "pledgeObjective", "numberOfContributors", "expireAt", "tags", "location"],
     methods: {
         goToTags: function() {

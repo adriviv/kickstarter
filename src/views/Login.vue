@@ -26,9 +26,8 @@
                     <label class="custom-control-label" for="customCheck1">Remember password</label>
                   </div>
                   <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
-                  <hr class="my-4">
-                  <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
-                  <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Sign in with Facebook</button>
+                  
+                  <button @click='showForgotForm'class="btn btn-lg btn-google btn-block text-uppercase"></i> Forgot Password</button>
                 </form>
               </div>
             </div>
@@ -37,6 +36,21 @@
       </div>
     </body>
 
+      <div v-if='forgot_form' class="container">
+        <div class="row">
+          <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+              <div class="card-body">
+                <form  class="form" id='forgot-form' @submit.prevent="forgot">
+                  <input v-model="email_forgot" id="email_forgot" placeholder="Enter your email" class="form-control"></input>
+                  <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Send Email</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 </template>
 
@@ -44,6 +58,7 @@
 
 <script>
 import Navbar from "@/components/Navbar";
+import axios from 'axios';
 
 export default {
   name: 'login',
@@ -54,6 +69,8 @@ export default {
     return {
       email: '',
       password: '',
+      forgot_form: false,
+      email_forgot: ''
     }
   },
   methods: {
@@ -65,8 +82,24 @@ export default {
         .then(response => {
           this.$router.push({ name: 'home' })
         })
+    },
+    showForgotForm() {
+        this.forgot_form = true
+    },
+    forgot() {
+      axios
+        .post(`/account/forgot`, {
+          email: this.email_forgot
+        })
+        .then(response => {
+          console.log('forgot', response)
+          window.location.reload()
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
-  }
+  },
 }
 </script>
 
